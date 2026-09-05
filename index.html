@@ -1,362 +1,25 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عمر حازم & محمد الشبراوي | مهندسون & DevOps</title>
+    <title>Omar Hazem & Mohamed El Shabrawy | مهندسون & DevOps</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0e17;
-            --bg-card: #111827;
-            --accent: #00d4aa;
-            --accent2: #3b82f6;
-            --text: #e5e7eb;
-            --text-muted: #9ca3af;
-            --border: #1f2937;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        /* خلفية متحركة */
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 212, 170, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 170, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -1;
-        }
-
-        /* الهيدر */
-        header {
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 14, 23, 0.85);
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-right: 1.8rem;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* الهيرو */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 5%;
-            position: relative;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 212, 170, 0.1);
-            border: 1px solid rgba(0, 212, 170, 0.3);
-            color: var(--accent);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.2rem);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.9rem 1.8rem;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), #00b894);
-            color: #0a0e17;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* قسم الفريق */
-        .team {
-            padding: 6rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3.5rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 212, 170, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0a0e17;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 0.3rem;
-        }
-
-        .card .role {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill {
-            background: rgba(0, 212, 170, 0.1);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* قسم المهارات */
-        .skills-section {
-            padding: 6rem 5%;
-            background: linear-gradient(180deg, transparent, rgba(0, 212, 170, 0.03), transparent);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .skill-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.8rem 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .skill-box:hover {
-            border-color: var(--accent);
-            transform: scale(1.03);
-        }
-
-        .skill-box .icon {
-            font-size: 2.2rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .skill-box h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
-
-        .skill-box p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* فوتر */
-        footer {
-            text-align: center;
-            padding: 3rem 5%;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        footer strong {
-            color: var(--accent);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* نفس الـ CSS الموجود عندك بدون تغيير */
     </style>
 </head>
+
 <body>
+
     <div class="bg-grid"></div>
 
     <header>
         <div class="logo">OH<span> & </span>MS</div>
+
         <nav>
             <a href="#team">الفريق</a>
             <a href="#skills">المهارات</a>
@@ -365,40 +28,53 @@
     </header>
 
     <section class="hero">
+
         <div class="hero-badge">
             <span>⚡</span> مهندسون جامدين في البرمجة و DevOps
         </div>
+
         <h1>
-            <span class="highlight">عمر حازم</span> &
-            <span class="highlight">محمد الشبراوي</span>
+            <span class="highlight">Omar Hazem</span> &
+            <span class="highlight">Mohamed El Shabrawy</span>
         </h1>
+
         <p>
             اتنين مهندسين بيبنوا حلول قوية، يكتبوا كود نظيف، ويشغلوا أنظمة على أعلى مستوى.
             خبرة حقيقية في البرمجة، DevOps، والـ Infrastructure.
         </p>
+
         <div class="cta-group">
             <a href="#team" class="btn btn-primary">اعرف أكتر عننا</a>
             <a href="#skills" class="btn btn-secondary">شوف المهارات</a>
         </div>
+
     </section>
 
     <section class="team" id="team">
+
         <div class="section-title">
             <h2>الفريق</h2>
             <p>مهندسين بيشتغلوا بجد وبيسيبوا أثر</p>
         </div>
 
         <div class="cards">
-            <!-- عمر حازم -->
+
+            <!-- Omar Hazem -->
             <div class="card">
-                <div class="card-avatar">ع</div>
-                <h3>عمر حازم</h3>
-                <div class="role">Software Engineer & DevOps</div>
+                <div class="card-avatar">O</div>
+
+                <h3>Omar Hazem</h3>
+
+                <div class="role">
+                    Software Engineer & DevOps
+                </div>
+
                 <p>
                     مهندس برمجيات محترف، بيكتب كود نظيف وقابل للتوسع.
                     خبرة قوية في بناء الأنظمة، الأتمتة، وإدارة البنية التحتية.
                     بيحب التحديات وبيحل المشاكل المعقدة بسرعة.
                 </p>
+
                 <div class="skills">
                     <span class="skill">Python</span>
                     <span class="skill">Docker</span>
@@ -409,16 +85,22 @@
                 </div>
             </div>
 
-            <!-- محمد الشبراوي -->
+            <!-- Mohamed El Shabrawy -->
             <div class="card">
-                <div class="card-avatar">م</div>
-                <h3>محمد الشبراوي</h3>
-                <div class="role">Full-Stack & DevOps Engineer</div>
+                <div class="card-avatar">M</div>
+
+                <h3>Mohamed El Shabrawy</h3>
+
+                <div class="role">
+                    Full-Stack & DevOps Engineer
+                </div>
+
                 <p>
                     مهندس Full-Stack جامد، بيشتغل على الـ Frontend والـ Backend بنفس القوة.
                     متخصص في DevOps والـ Cloud، وبيبني أنظمة مستقرة وسريعة.
                     شغله دايماً بجودة عالية وتنظيم محترم.
                 </p>
+
                 <div class="skills">
                     <span class="skill">JavaScript</span>
                     <span class="skill">Node.js</span>
@@ -428,54 +110,66 @@
                     <span class="skill">Monitoring</span>
                 </div>
             </div>
+
         </div>
     </section>
 
     <section class="skills-section" id="skills">
+
         <div class="section-title">
             <h2>إيه اللي بنعمله كويس؟</h2>
             <p>مهارات عملية بنستخدمها كل يوم</p>
         </div>
 
         <div class="skills-grid">
+
             <div class="skill-box">
                 <div class="icon">💻</div>
                 <h4>البرمجة</h4>
                 <p>كود نظيف، قابل للصيانة، وقابل للتوسع</p>
             </div>
+
             <div class="skill-box">
                 <div class="icon">🚀</div>
                 <h4>DevOps</h4>
                 <p>أتمتة كاملة، CI/CD، ونشر مستمر</p>
             </div>
+
             <div class="skill-box">
                 <div class="icon">☁️</div>
                 <h4>Cloud</h4>
                 <p>AWS وحلول سحابية مرنة وموثوقة</p>
             </div>
+
             <div class="skill-box">
                 <div class="icon">🐳</div>
                 <h4>Containers</h4>
                 <p>Docker + Kubernetes على أعلى مستوى</p>
             </div>
+
             <div class="skill-box">
                 <div class="icon">🔧</div>
                 <h4>Infrastructure</h4>
                 <p>Infrastructure as Code وTerraform</p>
             </div>
+
             <div class="skill-box">
                 <div class="icon">📊</div>
                 <h4>Monitoring</h4>
                 <p>مراقبة الأنظمة واكتشاف المشاكل بسرعة</p>
             </div>
+
         </div>
     </section>
 
     <footer id="contact">
         <p>
-            صُمم بواسطة <strong>عمر حازم</strong> و <strong>محمد الشبراوي</strong><br>
+            صُمم بواسطة <strong>Omar Hazem</strong> و
+            <strong>Mohamed El Shabrawy</strong><br>
             مهندسون جامدين في البرمجة و DevOps ⚡
         </p>
     </footer>
+
 </body>
 </html>
+```
