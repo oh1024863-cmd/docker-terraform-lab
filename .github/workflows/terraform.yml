@@ -1,4 +1,4 @@
-name: Terraform
+name: Terraform & Docker
 
 on:
   push:
@@ -9,10 +9,12 @@ on:
       - main
 
 jobs:
+  # ======================
+  # Job 1: Terraform
+  # ======================
   terraform:
     name: Terraform
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,10 +24,22 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        
 
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+        # لو عايز تعمل apply بعدين نقدر نضيفه
+
+  # ======================
+  # Job 2: Docker Build + Deploy
+  # ======================
   docker:
+    name: Build & Deploy
     runs-on: ubuntu-latest
+    # الـ Deploy يحصل بس على الـ main branch
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
       - name: Checkout
@@ -54,9 +68,3 @@ jobs:
             sudo docker stop my-web || true
             sudo docker rm my-web || true
             sudo docker run -d --name my-web -p 80:80 omarhazem13/my-web:latest
-
-      - name: Terraform Validate
-        run: terraform validate
-
-      - name: Terraform Plan
-        run: terraform plan
