@@ -1,30 +1,38 @@
-name: Terraform
+name: Docker CI/CD
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  terraform:
-    name: Terraform
+  docker:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Build Docker Image
+        run: docker build -t omarhazem13/my-web:latest .
 
-      - name: Terraform Validate
-        run: terraform validate
+      - name: Push Docker Image
+        run: docker push omarhazem13/my-web:latest
 
-      - name: Terraform Plan
-        run: terraform plan
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker pull omarhazem13/my-web:latest
+            sudo docker stop my-web || true
+            sudo docker rm my-web || true
+            sudo docker run -d --name my-web -p 80:80 omarhazem13/my-web:latest
